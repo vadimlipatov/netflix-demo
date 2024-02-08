@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BellIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { FaChevronDown } from 'react-icons/fa';
 
 import AccountMenu from '@/components/AccountMenu';
 import MobileMenu from '@/components/MobileMenu';
@@ -55,7 +56,7 @@ const Navbar = () => {
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
           <p className="text-white text-sm">Browse</p>
-          <ChevronDownIcon
+          <FaChevronDown
             className={`w-4 text-white fill-white transition ${
               showMobileMenu ? 'rotate-180' : 'rotate-0'
             }`}
@@ -76,7 +77,7 @@ const Navbar = () => {
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
               <img src="/images/default-blue.png" alt="" />
             </div>
-            <ChevronDownIcon
+            <FaChevronDown
               className={`w-4 text-white fill-white transition ${
                 showAccountMenu ? 'rotate-180' : 'rotate-0'
               }`}
