@@ -81,7 +81,7 @@ const Navbar = () => {
                 showAccountMenu ? 'rotate-180' : 'rotate-0'
               }`}
             />
-            <AccountMenu visible={showAccountMenu} toggleAccountMenu={setShowAccountMenu} />
+            <AccountMenu visible={showAccountMenu} setShowAccountMenu={setShowAccountMenu} />
           </div>
         </div>
       </div>

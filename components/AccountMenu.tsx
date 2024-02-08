@@ -13,25 +13,24 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 
 interface AccountMenuProps {
   visible?: boolean;
-  toggleAccountMenu: Dispatch<SetStateAction<boolean>>;
+  setShowAccountMenu: Dispatch<SetStateAction<boolean>>;
   // ref: ForwardedRef<HTMLDivElement>;
 }
-const AccountMenu = forwardRef(({ visible, toggleAccountMenu }: AccountMenuProps) => {
+const AccountMenu = forwardRef(({ visible, setShowAccountMenu }: AccountMenuProps) => {
   const { data: currentUser } = useCurrentUser();
   const accountRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if ((event.target as any).closest('#foo')) {
-        toggleAccountMenu(false);
-        console.log('Click');
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  });
+  // useEffect(() => {
+  //   function handleClickOutside(event: MouseEvent) {
+  //     if ((event.target as any).closest('#foo')) {
+  //       setShowAccountMenu(false);
+  //     }
+  //   }
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // });
 
   if (!visible) return null;
 
