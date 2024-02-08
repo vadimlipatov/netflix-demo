@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BellIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 import AccountMenu from '@/components/AccountMenu';
@@ -12,21 +12,18 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
 
+  const ref = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY);
       if (window.scrollY >= TOP_OFFSET) {
         setShowBackground(true);
       } else {
         setShowBackground(false);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleAccountMenu = useCallback(() => {
@@ -63,7 +60,7 @@ const Navbar = () => {
               showMobileMenu ? 'rotate-180' : 'rotate-0'
             }`}
           />
-          <MobileMenu visible={showMobileMenu} toggleMobileMenu={toggleMobileMenu}/>
+          <MobileMenu visible={showMobileMenu} toggleMobileMenu={toggleMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
@@ -84,7 +81,7 @@ const Navbar = () => {
                 showAccountMenu ? 'rotate-180' : 'rotate-0'
               }`}
             />
-            <AccountMenu visible={showAccountMenu} toggleAccountMenu={toggleAccountMenu} />
+            <AccountMenu visible={showAccountMenu} toggleAccountMenu={setShowAccountMenu} />
           </div>
         </div>
       </div>

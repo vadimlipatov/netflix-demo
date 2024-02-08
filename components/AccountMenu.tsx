@@ -1,35 +1,45 @@
 import { signOut } from 'next-auth/react';
-import React, { useEffect, useRef } from 'react';
+import React, {
+  Dispatch,
+  ForwardedRef,
+  ReactNode,
+  SetStateAction,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react';
 
 import useCurrentUser from '@/hooks/useCurrentUser';
 
 interface AccountMenuProps {
   visible?: boolean;
-  toggleAccountMenu: () => void;
+  toggleAccountMenu: Dispatch<SetStateAction<boolean>>;
+  // ref: ForwardedRef<HTMLDivElement>;
 }
-
-const AccountMenu: React.FC<AccountMenuProps> = ({ visible, toggleAccountMenu }) => {
+const AccountMenu = forwardRef(({ visible, toggleAccountMenu }: AccountMenuProps) => {
   const { data: currentUser } = useCurrentUser();
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const accountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        toggleAccountMenu();
+      if ((event.target as any).closest('#foo')) {
+        toggleAccountMenu(false);
+        console.log('Click');
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [toggleAccountMenu]);
+  });
 
   if (!visible) return null;
 
   return (
     <div
       className="bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex"
-      ref={wrapperRef}
+      ref={accountRef}
+      id="foo"
     >
       <div className="flex flex-col gap-3">
         <div className="px-3 group/item flex flex-row gap-3 items-center w-full">
@@ -46,6 +56,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible, toggleAccountMenu })
       </div>
     </div>
   );
-};
+});
 
+AccountMenu.displayName = 'AccountMenu';
 export default AccountMenu;

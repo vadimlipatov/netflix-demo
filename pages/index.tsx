@@ -3,8 +3,8 @@ import { NextPageContext } from 'next';
 import { getSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
-// import Billboard from '@/components/Billboard';
-// import MovieList from '@/components/MovieList';
+import Billboard from '@/components/Billboard';
+import MovieList from '@/components/MovieList';
 // import InfoModal from '@/components/InfoModal';
 import useMovieList from '@/hooks/useMovieList';
 import useFavorites from '@/hooks/useFavorites';
@@ -25,11 +25,11 @@ const Home = () => {
     <>
       {/* <InfoModal visible={isOpen} onClose={closeModal} /> */}
       <Navbar />
-      {/* <Billboard />
+      <Billboard />
       <div className="pb-40">
         <MovieList title="Trending Now" data={movies} />
         <MovieList title="My List" data={favorites} />
-      </div> */}
+      </div>
     </>
   );
 };
